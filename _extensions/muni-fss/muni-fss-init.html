@@ -70,9 +70,10 @@
       body.appendChild(meta);
     }
 
-    if (date) body.appendChild(date);
-
     slide.appendChild(body);
+
+    // Date goes directly on the slide (flex child) so it anchors to the bottom
+    if (date) slide.appendChild(date);
   }
 
   function buildOutroSlides(base) {

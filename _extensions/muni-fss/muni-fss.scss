@@ -109,7 +109,7 @@ $footer-height:   30px;
 
   // Blue MUNI/FSS wordmark directly on white background
   .title-logo {
-    height: 64px;
+    height: 80px;
     width: auto;
     align-self: flex-start;
     flex-shrink: 0;
@@ -164,11 +164,13 @@ $footer-height:   30px;
     margin: 0;
   }
 
-  .date {
+  // Date sits outside .title-body as a direct flex child — pushed to bottom
+  > .date {
     font-size: 0.85em;
     font-weight: 400;
     color: $mainColor;
     margin: 0;
+    padding-bottom: $footer-height;
   }
 
   &.center { text-align: left !important; }
