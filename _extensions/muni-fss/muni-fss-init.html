@@ -28,17 +28,15 @@
     var authorText  = authorEl  ? authorEl.textContent.trim()  : '';
     var affilText   = affil     ? affil.textContent.trim()      : '';
 
-    // Clear slide and rebuild with branded structure
+    // Clear slide and rebuild: logo top-left on white, content below
     slide.innerHTML = '';
-    slide.classList.remove('center'); // override Quarto centering
+    slide.classList.remove('center');
 
-    var header = document.createElement('div');
-    header.className = 'title-header';
     var logo = document.createElement('img');
-    logo.src = base + 'assets/logos/logo-fss-white.png';
+    logo.src = base + 'assets/logos/logo-fss-blue.png';
     logo.alt = 'MUNI FSS';
-    header.appendChild(logo);
-    slide.appendChild(header);
+    logo.className = 'title-logo';
+    slide.appendChild(logo);
 
     var body = document.createElement('div');
     body.className = 'title-body';
@@ -46,18 +44,24 @@
     if (title) body.appendChild(title);
     if (subtitle) body.appendChild(subtitle);
 
-    if (authorText) {
-      var a = document.createElement('p');
-      a.className = 'title-author';
-      a.textContent = authorText;
-      body.appendChild(a);
+    if (authorText || affilText) {
+      var meta = document.createElement('div');
+      meta.className = 'title-meta';
+      if (authorText) {
+        var a = document.createElement('p');
+        a.className = 'title-author';
+        a.textContent = authorText;
+        meta.appendChild(a);
+      }
+      if (affilText) {
+        var inst = document.createElement('p');
+        inst.className = 'title-institute';
+        inst.textContent = affilText;
+        meta.appendChild(inst);
+      }
+      body.appendChild(meta);
     }
-    if (affilText) {
-      var i = document.createElement('p');
-      i.className = 'title-institute';
-      i.textContent = affilText;
-      body.appendChild(i);
-    }
+
     if (date) body.appendChild(date);
 
     slide.appendChild(body);

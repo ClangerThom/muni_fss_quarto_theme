@@ -102,26 +102,25 @@ $footer-height:   30px;
 
 // ── Title slide ────────────────────────────────────────────────────────────
 #title-slide {
-  padding: 0 !important;
+  padding: $slide-margin !important;
+  display: flex !important;
+  flex-direction: column !important;
+  text-align: left !important;
 
-  // injected by muni-fss-init.html
-  .title-header {
-    background: $mu-blue;
-    width: 100%;
-    padding: 14px $slide-margin;
-    box-sizing: border-box;
-
-    img {
-      height: 54px;
-      display: block;
-    }
+  // Blue MUNI/FSS wordmark directly on white background
+  .title-logo {
+    height: 64px;
+    display: block;
+    flex-shrink: 0;
   }
 
+  // Flexible gap between logo and content (mirrors Beamer's \vskip plus 6filll)
   .title-body {
-    padding: $slide-margin * 1.5 $slide-margin $slide-margin;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: $slide-margin;
   }
 
   .title {
@@ -129,39 +128,42 @@ $footer-height:   30px;
     font-weight: 700;
     color: $mu-blue;
     text-shadow: none;
-    margin: 0 0 0.15em;
+    margin: 0 0 0.2em;
   }
 
   .subtitle {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 400;
-    color: $gray-6;
-    margin: 0 0 1.4em;
+    color: $mainColor;
+    margin: 0 0 1.2em;
+  }
+
+  .title-meta {
+    margin-bottom: 0.6em;
   }
 
   .title-author {
     font-size: 0.95em;
     font-weight: 700;
     color: $mainColor;
-    margin: 0 0 0.2em;
+    margin: 0 0 0.1em;
   }
 
   .title-institute {
-    font-size: 0.9em;
-    color: $gray-6;
-    margin: 0 0 0.15em;
-  }
-
-  .date {
     font-size: 0.85em;
+    font-weight: 400;
     color: $gray-6;
     margin: 0;
   }
 
-  // Quarto adds .center — override so our flex layout works
-  &.center {
-    text-align: left !important;
+  .date {
+    font-size: 0.85em;
+    font-weight: 400;
+    color: $mainColor;
+    margin: 0;
   }
+
+  &.center { text-align: left !important; }
 }
 
 // ── Outro slide ────────────────────────────────────────────────────────────
