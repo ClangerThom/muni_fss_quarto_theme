@@ -111,7 +111,7 @@ $footer-height:   30px;
   .title-logo {
     height: 64px;
     width: auto;
-    display: block;
+    align-self: flex-start;
     flex-shrink: 0;
   }
 
