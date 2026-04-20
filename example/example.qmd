@@ -1,0 +1,87 @@
+---
+title: "Full Presentation Title"
+subtitle: "Full Presentation Subtitle"
+author: "Robert Speedwagon"
+institute: "Faculty of Social Studies, Masaryk University"
+date: today
+format: muni-fss-revealjs
+---
+
+## Plain Text & Emphasis
+
+Plain text, **bold emphasis**, *italic*, and `inline code`.
+
+Structure color applied to [links](https://www.muni.cz).
+
+## Bullet Lists
+
+- A single-line bullet list item
+- A bullet list item that is quite long, forcing a line break, which also contains **emphasized text**
+  - A second-level list item
+    - A third-level list item
+  - **An emphasized second-level list item**
+
+## Numbered Lists
+
+1. A numbered list item
+2. A second item containing a math expression
+
+$$E = mc^2$$
+
+## Code Block
+
+```r
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "#007A53") +
+  theme_minimal()
+```
+
+## Table
+
+| First Name | Surname  | Field          |
+|------------|----------|----------------|
+| Albert     | Einstein | Physics        |
+| Marie      | Curie    | Chemistry      |
+| Thomas     | Edison   | Engineering    |
+
+: The great minds of the 19th century
+
+## Blockquote & Callout
+
+> The function of education is to teach one to think intensively and to think critically.
+
+::: {.callout-note}
+This is a **note** callout block.
+:::
+
+::: {.callout-warning}
+This is a **warning** callout block.
+:::
+
+## Two Columns
+
+:::: {.cols-2}
+::: {}
+**Left column**
+
+- Point one
+- Point two
+- Point three
+:::
+::: {}
+**Right column**
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+:::
+::::
+
+## Gray Background Slide {.slide-gray}
+
+This slide uses the `.slide-gray` class for a light gray background.
+
+Useful for transitional or summary slides.
+
+## Thank You {.outro}

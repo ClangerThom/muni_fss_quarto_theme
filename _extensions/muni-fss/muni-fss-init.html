@@ -1,0 +1,151 @@
+<script>
+(function () {
+  'use strict';
+
+  // Resolve base URL of this extension by finding its stylesheet in <head>
+  function getExtBase() {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].href && links[i].href.indexOf('muni-fss') !== -1) {
+        return links[i].href.replace(/[^/]*\.css[^/]*$/, '');
+      }
+    }
+    return './_extensions/muni-fss/';
+  }
+
+  function buildTitleSlide(base) {
+    var slide = document.getElementById('title-slide');
+    if (!slide) return;
+
+    // Collect existing Quarto-generated elements (Quarto 1.4+ class names)
+    var title     = slide.querySelector('.title');
+    var subtitle  = slide.querySelector('.subtitle');
+    var authorEl  = slide.querySelector('.quarto-title-author-name');
+    var affil     = slide.querySelector('.quarto-title-affiliation');
+    var date      = slide.querySelector('.date');
+
+    // Promote author/affiliation out of their wrappers before clearing
+    var authorText  = authorEl  ? authorEl.textContent.trim()  : '';
+    var affilText   = affil     ? affil.textContent.trim()      : '';
+
+    // Clear slide and rebuild with branded structure
+    slide.innerHTML = '';
+    slide.classList.remove('center'); // override Quarto centering
+
+    var header = document.createElement('div');
+    header.className = 'title-header';
+    var logo = document.createElement('img');
+    logo.src = base + 'assets/logos/logo-fss-white.png';
+    logo.alt = 'MUNI FSS';
+    header.appendChild(logo);
+    slide.appendChild(header);
+
+    var body = document.createElement('div');
+    body.className = 'title-body';
+
+    if (title) body.appendChild(title);
+    if (subtitle) body.appendChild(subtitle);
+
+    if (authorText) {
+      var a = document.createElement('p');
+      a.className = 'title-author';
+      a.textContent = authorText;
+      body.appendChild(a);
+    }
+    if (affilText) {
+      var i = document.createElement('p');
+      i.className = 'title-institute';
+      i.textContent = affilText;
+      body.appendChild(i);
+    }
+    if (date) body.appendChild(date);
+
+    slide.appendChild(body);
+  }
+
+  function buildOutroSlides(base) {
+    var slides = document.querySelectorAll('.reveal .slides section.outro');
+    slides.forEach(function (slide) {
+      slide.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = base + 'assets/logos/logo-mu-wordmark.png';
+      img.alt = 'Masaryk University';
+      img.className = 'outro-logo';
+      slide.appendChild(img);
+    });
+  }
+
+  function createFooter() {
+    var footer = document.createElement('div');
+    footer.className = 'muni-footer';
+    footer.id = 'muni-fss-footer';
+    footer.innerHTML =
+      '<span class="footer-author"></span>' +
+      '<span class="footer-dot">&middot;</span>' +
+      '<span class="footer-title"></span>' +
+      '<span class="footer-dot">&middot;</span>' +
+      '<span class="footer-date"></span>' +
+      '<span class="footer-pages"></span>';
+    document.querySelector('.reveal').appendChild(footer);
+    return footer;
+  }
+
+  function populateFooter(footer) {
+    var titleSlide = document.getElementById('title-slide');
+    if (!titleSlide) return;
+
+    // After buildTitleSlide runs, Quarto's wrappers are gone — use rebuilt classes
+    var authorEl = titleSlide.querySelector('.title-author');
+    var titleEl  = titleSlide.querySelector('.title');
+    var dateEl   = titleSlide.querySelector('.date');
+
+    footer.querySelector('.footer-author').textContent =
+      authorEl ? authorEl.textContent.trim() : '';
+    footer.querySelector('.footer-title').textContent =
+      titleEl ? titleEl.textContent.trim() : '';
+    footer.querySelector('.footer-date').textContent =
+      dateEl ? dateEl.textContent.trim() : '';
+  }
+
+  function updateFooterVisibility(footer) {
+    var current = Reveal.getCurrentSlide();
+    var isTitle = current && current.id === 'title-slide';
+    var isOutro = current && current.classList.contains('outro');
+    footer.style.display = (isTitle || isOutro) ? 'none' : 'flex';
+  }
+
+  function updatePageNumbers(footer) {
+    var indices = Reveal.getIndices();
+    var total   = Reveal.getTotalSlides();
+    // h is 0-based horizontal index; add 1 for display
+    footer.querySelector('.footer-pages').textContent =
+      (indices.h + 1) + ' / ' + total;
+  }
+
+  function init() {
+    var base   = getExtBase();
+    buildTitleSlide(base);
+    buildOutroSlides(base);
+    var footer = createFooter();
+    populateFooter(footer);
+
+    Reveal.on('ready', function () {
+      updateFooterVisibility(footer);
+      updatePageNumbers(footer);
+    });
+
+    Reveal.on('slidechanged', function () {
+      updateFooterVisibility(footer);
+      updatePageNumbers(footer);
+    });
+  }
+
+  // Reveal.js is loaded before this script; wait for DOMContentLoaded
+  // to ensure all slides are in the DOM, then hook into Reveal's ready event
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+}());
+</script>

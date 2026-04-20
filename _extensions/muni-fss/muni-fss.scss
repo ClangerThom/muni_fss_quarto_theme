@@ -1,0 +1,227 @@
+/*-- scss:defaults --*/
+
+// ── Reveal.js theme variables ──────────────────────────────────────────────
+$mainFont:               "PT Sans Caption", Arial, sans-serif;
+$headingFont:            "PT Sans Caption", Arial, sans-serif;
+$mainColor:              #1a1a1a;
+$headingColor:           #007A53;
+$backgroundColor:        #ffffff;
+$linkColor:              #007A53;
+$linkColorHover:         #005a3c;
+$selectionBackgroundColor: #007A53;
+$selectionColor:         #ffffff;
+$mainFontSize:           28px;
+$headingTextShadow:      none;
+$headingLetterSpacing:   normal;
+$headingTextTransform:   none;
+$headingFontWeight:      700;
+
+// ── Design tokens ──────────────────────────────────────────────────────────
+$fss-green:       #007A53;
+$fss-green-dark:  #005a3c;
+$mu-blue:         #0000DC;
+$orange:          #FBAE40;
+$gray-1:          #F0F0F0;
+$gray-2:          #E1E1E1;
+$gray-6:          #969696;
+$slide-margin:    36px;
+$footer-height:   30px;
+
+
+/*-- scss:rules --*/
+
+// ── Base layout ────────────────────────────────────────────────────────────
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section {
+  text-align: left;
+  padding: $slide-margin $slide-margin ($slide-margin + $footer-height) $slide-margin;
+  box-sizing: border-box;
+}
+
+// ── Headings ───────────────────────────────────────────────────────────────
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: $headingFont;
+  font-weight: 700;
+  color: $fss-green;
+  text-transform: none;
+  text-shadow: none;
+  letter-spacing: normal;
+  margin-bottom: 0.4em;
+}
+
+.reveal h2 { font-size: 1.5em; }
+.reveal h3 { font-size: 1.1em; color: $gray-6; font-weight: 400; }
+
+// ── Links ──────────────────────────────────────────────────────────────────
+.reveal a       { color: $fss-green; text-decoration: underline; }
+.reveal a:hover { color: $fss-green-dark; }
+
+// ── Lists ──────────────────────────────────────────────────────────────────
+.reveal ul,
+.reveal ul ul,
+.reveal ul ul ul {
+  list-style-type: square;
+}
+
+// ── Inline code ────────────────────────────────────────────────────────────
+.reveal code:not(pre code) {
+  font-size: 0.85em;
+  background: $gray-1;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: $fss-green-dark;
+}
+
+// ── Blocks ─────────────────────────────────────────────────────────────────
+.reveal .callout {
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.reveal blockquote {
+  border-left: 4px solid $fss-green;
+  padding-left: 1em;
+  color: $gray-6;
+  font-style: normal;
+  background: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+// ── Title slide ────────────────────────────────────────────────────────────
+#title-slide {
+  padding: 0 !important;
+
+  // injected by muni-fss-init.html
+  .title-header {
+    background: $fss-green;
+    width: 100%;
+    padding: 14px $slide-margin;
+    box-sizing: border-box;
+
+    img {
+      height: 54px;
+      display: block;
+    }
+  }
+
+  .title-body {
+    padding: $slide-margin * 1.5 $slide-margin $slide-margin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 2em;
+    font-weight: 700;
+    color: $fss-green;
+    text-shadow: none;
+    margin: 0 0 0.15em;
+  }
+
+  .subtitle {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: $gray-6;
+    margin: 0 0 1.4em;
+  }
+
+  .title-author {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: $mainColor;
+    margin: 0 0 0.2em;
+  }
+
+  .title-institute {
+    font-size: 0.9em;
+    color: $gray-6;
+    margin: 0 0 0.15em;
+  }
+
+  .date {
+    font-size: 0.85em;
+    color: $gray-6;
+    margin: 0;
+  }
+
+  // Quarto adds .center — override so our flex layout works
+  &.center {
+    text-align: left !important;
+  }
+}
+
+// ── Outro slide ────────────────────────────────────────────────────────────
+.reveal .slides section.outro {
+  background: $fss-green !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $slide-margin !important;
+
+  .outro-logo {
+    width: 75%;
+    max-width: 750px;
+  }
+}
+
+// ── Gray-background slide variant ──────────────────────────────────────────
+.reveal .slides section.slide-gray {
+  background: $gray-1 !important;
+}
+
+// ── Two-column layouts ─────────────────────────────────────────────────────
+.reveal .cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $slide-margin;
+  align-items: start;
+}
+
+.reveal .cols-3-7 {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: $slide-margin;
+  align-items: start;
+}
+
+.reveal .cols-7-3 {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: $slide-margin;
+  align-items: start;
+}
+
+// ── Footer ─────────────────────────────────────────────────────────────────
+.muni-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $footer-height;
+  display: flex;
+  align-items: center;
+  padding: 0 $slide-margin;
+  font-family: $mainFont;
+  font-size: 13px;
+  color: $gray-6;
+  box-sizing: border-box;
+  z-index: 500;
+  border-top: 1px solid $gray-2;
+  background: #ffffff;
+  pointer-events: none;
+
+  .footer-author { color: $fss-green; font-weight: 700; }
+  .footer-dot    { margin: 0 6px; color: $gray-2; }
+  .footer-pages  { margin-left: auto; color: $fss-green; font-weight: 700; }
+}
