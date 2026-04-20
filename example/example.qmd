@@ -2,6 +2,7 @@
 title: "Full Presentation Title"
 subtitle: "Full Presentation Subtitle"
 author: "Robert Speedwagon"
+email: "personal-id@mail.muni.cz"
 institute: "Faculty of Social Studies, Masaryk University"
 date: today
 format: muni-fss-revealjs

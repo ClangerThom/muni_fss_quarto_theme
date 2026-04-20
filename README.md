@@ -111,8 +111,9 @@ This renders a full-green slide with the Masaryk University wordmark centered.
 | `title` | — | Full presentation title (shown on title slide) |
 | `subtitle` | — | Optional subtitle |
 | `author` | — | Presenter name (also appears in footer) |
+| `email` | — | Presenter email shown on title slide below the name |
 | `institute` | — | Affiliation shown on title slide |
-| `date` | — | Use `today` for the current date |
+| `date` | — | Use `today` for the current date (formatted dd-mm-yyyy) |
 | `format` | — | Must be `muni-fss-revealjs` |
 | `footer-author` | `author` | Short name in footer, e.g. `"R. Speedwagon"` |
 | `footer-title` | `title` | Short title shown **bold** in footer |

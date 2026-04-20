@@ -18,5 +18,6 @@ contributes:
       height: 720
       margin: 0.04
       include-after-body: muni-fss-init.html
+      date-format: "DD-MM-YYYY"
       filters:
         - muni-fss.lua

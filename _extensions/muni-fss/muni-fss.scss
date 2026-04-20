@@ -110,6 +110,7 @@ $footer-height:   30px;
   // Blue MUNI/FSS wordmark directly on white background
   .title-logo {
     height: 64px;
+    width: auto;
     display: block;
     flex-shrink: 0;
   }
@@ -143,6 +144,13 @@ $footer-height:   30px;
   }
 
   .title-author {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: $mainColor;
+    margin: 0;
+  }
+
+  .title-email {
     font-size: 0.95em;
     font-weight: 700;
     color: $mainColor;

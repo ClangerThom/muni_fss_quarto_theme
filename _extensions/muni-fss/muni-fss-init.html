@@ -44,7 +44,9 @@
     if (title) body.appendChild(title);
     if (subtitle) body.appendChild(subtitle);
 
-    if (authorText || affilText) {
+    var emailText = getMeta('muni-email') || '';
+
+    if (authorText || emailText || affilText) {
       var meta = document.createElement('div');
       meta.className = 'title-meta';
       if (authorText) {
@@ -52,6 +54,12 @@
         a.className = 'title-author';
         a.textContent = authorText;
         meta.appendChild(a);
+      }
+      if (emailText) {
+        var e = document.createElement('p');
+        e.className = 'title-email';
+        e.textContent = emailText;
+        meta.appendChild(e);
       }
       if (affilText) {
         var inst = document.createElement('p');

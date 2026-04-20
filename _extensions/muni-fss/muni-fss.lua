@@ -13,6 +13,7 @@ function Meta(meta)
 
   add('muni-footer-author', meta['footer-author'])
   add('muni-footer-title',  meta['footer-title'])
+  add('muni-email',         meta['email'])
 
   if #tags > 0 then
     meta['header-includes'] = meta['header-includes'] or pandoc.MetaList({})
