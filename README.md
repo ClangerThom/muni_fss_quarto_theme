@@ -114,6 +114,10 @@ This renders a full-green slide with the Masaryk University wordmark centered.
 | `institute` | — | Affiliation shown on title slide |
 | `date` | — | Use `today` for the current date |
 | `format` | — | Must be `muni-fss-revealjs` |
+| `footer-author` | `author` | Short name in footer, e.g. `"R. Speedwagon"` |
+| `footer-title` | `title` | Short title shown **bold** in footer |
+
+**Footer format:** `[footer-author] · [footer-title] · [date]` with slide number on the right, matching the Beamer footline template.
 
 Any standard [Quarto Revealjs options](https://quarto.org/docs/presentations/revealjs/) can be added under `format: muni-fss-revealjs:` and will override the theme defaults.
 

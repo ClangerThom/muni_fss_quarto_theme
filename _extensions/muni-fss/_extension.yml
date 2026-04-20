@@ -18,3 +18,5 @@ contributes:
       height: 720
       margin: 0.04
       include-after-body: muni-fss-init.html
+      filters:
+        - muni-fss.lua

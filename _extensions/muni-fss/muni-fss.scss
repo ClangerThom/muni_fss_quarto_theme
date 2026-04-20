@@ -4,11 +4,11 @@
 $mainFont:               "PT Sans Caption", Arial, sans-serif;
 $headingFont:            "PT Sans Caption", Arial, sans-serif;
 $mainColor:              #1a1a1a;
-$headingColor:           #007A53;
+$headingColor:           #0000DC;
 $backgroundColor:        #ffffff;
-$linkColor:              #007A53;
-$linkColorHover:         #005a3c;
-$selectionBackgroundColor: #007A53;
+$linkColor:              #0000DC;
+$linkColorHover:         #0000a0;
+$selectionBackgroundColor: #0000DC;
 $selectionColor:         #ffffff;
 $mainFontSize:           28px;
 $headingTextShadow:      none;
@@ -17,9 +17,9 @@ $headingTextTransform:   none;
 $headingFontWeight:      700;
 
 // ── Design tokens ──────────────────────────────────────────────────────────
-$fss-green:       #007A53;
-$fss-green-dark:  #005a3c;
 $mu-blue:         #0000DC;
+$mu-blue-dark:    #0000a0;
+$fss-green:       #007A53;   // FSS faculty accent — example blocks only
 $orange:          #FBAE40;
 $gray-1:          #F0F0F0;
 $gray-2:          #E1E1E1;
@@ -50,7 +50,7 @@ $footer-height:   30px;
 .reveal h6 {
   font-family: $headingFont;
   font-weight: 700;
-  color: $fss-green;
+  color: $mu-blue;
   text-transform: none;
   text-shadow: none;
   letter-spacing: normal;
@@ -61,8 +61,8 @@ $footer-height:   30px;
 .reveal h3 { font-size: 1.1em; color: $gray-6; font-weight: 400; }
 
 // ── Links ──────────────────────────────────────────────────────────────────
-.reveal a       { color: $fss-green; text-decoration: underline; }
-.reveal a:hover { color: $fss-green-dark; }
+.reveal a       { color: $mu-blue; text-decoration: underline; }
+.reveal a:hover { color: $mu-blue-dark; }
 
 // ── Lists ──────────────────────────────────────────────────────────────────
 .reveal ul,
@@ -77,7 +77,7 @@ $footer-height:   30px;
   background: $gray-1;
   padding: 0.1em 0.35em;
   border-radius: 3px;
-  color: $fss-green-dark;
+  color: $mu-blue-dark;
 }
 
 // ── Blocks ─────────────────────────────────────────────────────────────────
@@ -87,7 +87,7 @@ $footer-height:   30px;
 }
 
 .reveal blockquote {
-  border-left: 4px solid $fss-green;
+  border-left: 4px solid $mu-blue;
   padding-left: 1em;
   color: $gray-6;
   font-style: normal;
@@ -96,13 +96,17 @@ $footer-height:   30px;
   width: 100%;
 }
 
+// FSS faculty accent: example / tip callouts use the faculty green
+.reveal .callout-tip  { border-left-color: $fss-green; }
+.reveal .callout-tip > .callout-header { background-color: rgba($fss-green, 0.1); }
+
 // ── Title slide ────────────────────────────────────────────────────────────
 #title-slide {
   padding: 0 !important;
 
   // injected by muni-fss-init.html
   .title-header {
-    background: $fss-green;
+    background: $mu-blue;
     width: 100%;
     padding: 14px $slide-margin;
     box-sizing: border-box;
@@ -123,7 +127,7 @@ $footer-height:   30px;
   .title {
     font-size: 2em;
     font-weight: 700;
-    color: $fss-green;
+    color: $mu-blue;
     text-shadow: none;
     margin: 0 0 0.15em;
   }
@@ -162,7 +166,7 @@ $footer-height:   30px;
 
 // ── Outro slide ────────────────────────────────────────────────────────────
 .reveal .slides section.outro {
-  background: $fss-green !important;
+  background: $mu-blue !important;
   display: flex !important;
   flex-direction: column;
   align-items: center;
@@ -214,14 +218,16 @@ $footer-height:   30px;
   padding: 0 $slide-margin;
   font-family: $mainFont;
   font-size: 13px;
-  color: $gray-6;
+  color: $mu-blue;
   box-sizing: border-box;
   z-index: 500;
   border-top: 1px solid $gray-2;
   background: #ffffff;
   pointer-events: none;
 
-  .footer-author { color: $fss-green; font-weight: 700; }
-  .footer-dot    { margin: 0 6px; color: $gray-2; }
-  .footer-pages  { margin-left: auto; color: $fss-green; font-weight: 700; }
+  .footer-author { font-weight: 400; }
+  .footer-dot    { margin: 0 6px; color: $gray-6; }
+  .footer-title  { font-weight: 700; }
+  .footer-date   { font-weight: 400; }
+  .footer-pages  { margin-left: auto; font-weight: 400; }
 }

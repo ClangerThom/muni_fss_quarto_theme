@@ -90,21 +90,30 @@
     return footer;
   }
 
+  // Read optional <meta> overrides injected by a Lua filter or include-in-header
+  function getMeta(name) {
+    var el = document.querySelector('meta[name="' + name + '"]');
+    return el ? el.content.trim() : null;
+  }
+
   function populateFooter(footer) {
     var titleSlide = document.getElementById('title-slide');
     if (!titleSlide) return;
 
-    // After buildTitleSlide runs, Quarto's wrappers are gone — use rebuilt classes
+    // Prefer explicit short-* overrides from YAML metadata, fall back to DOM
     var authorEl = titleSlide.querySelector('.title-author');
     var titleEl  = titleSlide.querySelector('.title');
     var dateEl   = titleSlide.querySelector('.date');
 
-    footer.querySelector('.footer-author').textContent =
-      authorEl ? authorEl.textContent.trim() : '';
-    footer.querySelector('.footer-title').textContent =
-      titleEl ? titleEl.textContent.trim() : '';
-    footer.querySelector('.footer-date').textContent =
-      dateEl ? dateEl.textContent.trim() : '';
+    var author = getMeta('muni-footer-author') ||
+                 (authorEl ? authorEl.textContent.trim() : '');
+    var title  = getMeta('muni-footer-title') ||
+                 (titleEl ? titleEl.textContent.trim() : '');
+    var date   = dateEl ? dateEl.textContent.trim() : '';
+
+    footer.querySelector('.footer-author').textContent = author;
+    footer.querySelector('.footer-title').textContent  = title;
+    footer.querySelector('.footer-date').textContent   = date;
   }
 
   function updateFooterVisibility(footer) {

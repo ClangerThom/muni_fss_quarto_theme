@@ -5,6 +5,9 @@ author: "Robert Speedwagon"
 institute: "Faculty of Social Studies, Masaryk University"
 date: today
 format: muni-fss-revealjs
+# Optional: override what appears in the footer
+# footer-author: "R. Speedwagon"
+# footer-title: "Short Presentation Title"
 ---
 
 ## Plain Text & Emphasis
