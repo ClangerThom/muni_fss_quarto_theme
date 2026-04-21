@@ -13,3 +13,5 @@ example/example_files/
 # Source template reference files (not for public distribution)
 *.potx
 *.zip
+
+/.luarc.json
