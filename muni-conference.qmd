@@ -1,0 +1,197 @@
+---
+title: "Full Presentation Title"
+subtitle: "A Comparison of Output Formats"
+author: "Thomas Philip Heyes"
+institute: "Faculty of Social Studies, Masaryk University"
+date: today
+format:
+  beamer:
+    theme: MU
+    themeoptions:
+      - workplace=fss
+    aspectratio: 169
+    pdf-engine: pdflatex
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{tikz}
+        % Rearranged mubeamer footline: page number first (bottom left),
+        % then author - title - date; MUNI FSS wordmark bottom right.
+        \makeatletter
+        % Suppress the infolines headline (section name at the top of slides)
+        \setbeamertemplate{headline}{}
+        \setbeamertemplate{footline}{%
+          \hskip\mubeamer@length@margin
+          \usebeamercolor[fg]{page number in head/foot}%
+            \usebeamerfont{author in head/foot}\insertframenumber\ /
+            \inserttotalframenumber
+          \usebeamercolor[fg]{structure}%
+            \usebeamerfont{structure}\ \lower2pt\hbox{\Large$\cdot$}\
+          \usebeamercolor[fg]{author in head/foot}%
+            \usebeamerfont{author in head/foot}\insertshortauthor
+          \usebeamercolor[fg]{structure}%
+            \usebeamerfont{structure}\ \lower2pt\hbox{\Large$\cdot$}\
+          \usebeamercolor[fg]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertshorttitle
+          \usebeamercolor[fg]{structure}%
+            \usebeamerfont{structure}\ \lower2pt\hbox{\Large$\cdot$}\
+          \usebeamercolor[fg]{date in head/foot}%
+            \usebeamerfont{date in head/foot}\insertshortdate
+          \hfill
+          \hskip\mubeamer@length@margin
+          \vrule width 0pt height \mubeamer@length@footlineheight
+                 depth \mubeamer@length@footlinebottompadding
+          \begin{tikzpicture}[remember picture,overlay]
+            \node[anchor=south east,xshift=-0.25cm,yshift=0.18cm]
+              at (current page.south east)
+              {\includegraphics[height=0.6cm]{mubeamer/logo/mubeamer-fss-english-color}};
+          \end{tikzpicture}}
+        \makeatother
+---
+
+## Bullet Points
+
+Plain text, **bold text**, *italic text*, and `inline code`.
+
+- A single-line bullet list item
+- A bullet list item that is quite long in order to force a line break,
+  which also contains **emphasized text**
+  - A second-level list item
+    - A third-level list item
+  - A second-level item with a math expression $E = mc^2$
+
+1. A numbered list item
+2. Another numbered list item
+
+## A Table
+
+| First Name | Surname  | Field      | Nobel Prize |
+|------------|----------|------------|:-----------:|
+| Albert     | Einstein | Physics    |    1921     |
+| Marie      | Curie    | Chemistry  |    1911     |
+| Ivan       | Pavlov   | Physiology |    1904     |
+
+: The great minds of the turn of the century
+
+## Table from an R Data Frame (kable)
+
+```{r}
+#| echo: false
+#| message: false
+library(dplyr)
+mtcars |>
+  group_by(cyl) |>
+  summarise(
+    n = n(),
+    mpg = mean(mpg),
+    hp = mean(hp),
+    wt = mean(wt)
+  ) |>
+  knitr::kable(
+    digits = 1, booktabs = TRUE,
+    col.names = c("Cylinders", "N", "Mean MPG", "Mean HP", "Mean weight"),
+    caption = "mtcars summarised by cylinder count (dplyr + kable)"
+  )
+```
+
+## Styled Table (kableExtra)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(kableExtra)
+mtcars |>
+  head(6) |>
+  select(mpg, cyl, hp, wt) |>
+  kbl(
+    format = "latex", booktabs = TRUE, digits = 2,
+    col.names = c("MPG", "Cylinders", "HP", "Weight"),
+    caption = "First six rows of mtcars (kableExtra styling)"
+  ) |>
+  kable_styling(latex_options = "striped") |>
+  row_spec(0, bold = TRUE, color = "white", background = "#0000DC")
+```
+
+## A Figure
+
+```{r}
+#| echo: false
+#| fig-cap: "Simulated treatment effect by experimental group"
+#| fig-width: 7
+#| fig-height: 4
+#| out-height: 55%
+library(ggplot2)
+set.seed(42)
+d <- data.frame(
+  group = rep(c("Control", "Treatment A", "Treatment B"), each = 50),
+  outcome = c(rnorm(50, 5.0, 1.2), rnorm(50, 5.8, 1.2), rnorm(50, 6.4, 1.2))
+)
+ggplot(d, aes(group, outcome)) +
+  geom_boxplot(fill = "#0000DC", alpha = 0.15, colour = "#0000DC") +
+  labs(x = NULL, y = "Outcome score") +
+  theme_minimal(base_size = 14)
+```
+
+## Annotated Figure (ggplot + ggforce)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Highlight box, arrow, and explanatory textbox drawn in code"
+#| fig-width: 8
+#| fig-height: 4.2
+#| out-height: 55%
+library(ggforce)
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(colour = "#0000DC", size = 2.5) +
+  geom_mark_rect(
+    aes(filter = wt > 5, label = "Heavy cars"),
+    description = "These three drag the trend line down",
+    fill = "#FBAE40", alpha = 0.2, colour = "#F08C00",
+    label.fontsize = c(11, 9)
+  ) +
+  annotate("curve",
+    x = 2.3, y = 14.5, xend = 3.4, yend = 15.2,
+    curvature = 0.25, colour = "grey30",
+    arrow = arrow(length = unit(2, "mm"))
+  ) +
+  annotate("label",
+    x = 2.3, y = 13.5, label = "A manual annotate() label\nwith an arrow",
+    size = 3.2, fill = "white"
+  ) +
+  labs(x = "Weight (1000 lbs)", y = "Miles per gallon") +
+  theme_minimal(base_size = 14)
+```
+
+## Two Columns
+
+:::: {.columns}
+
+::: {.column width="45%"}
+- Point about the figure
+- Another observation
+- A third, longer remark that wraps
+  onto a second line
+:::
+
+::: {.column width="55%"}
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 4
+barplot(
+  c(23, 41, 17, 35),
+  names.arg = c("Q1", "Q2", "Q3", "Q4"),
+  col = "#0000DC", border = NA,
+  ylab = "Respondents"
+)
+```
+:::
+
+::::
+
+# A Section Heading
+
+{{< include _contact.qmd >}}

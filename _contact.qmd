@@ -1,0 +1,31 @@
+## Thank You for Your Attention!
+
+:::: {.columns}
+
+::: {.column width="46%"}
+**Thomas Philip Heyes**
+
+Department of Sociology\
+Faculty of Social Studies\
+Masaryk University\
+Joštova 10, Brno
+
+[thomas.philip.heyes@mail.muni.cz](mailto:thomas.philip.heyes@mail.muni.cz)
+:::
+
+::: {.column width="54%"}
+**Find me online**
+
+- ORCID: [0009-0001-3816-3425](https://orcid.org/0009-0001-3816-3425)
+- Web of Science: [KOC-6783-2024](https://www.webofscience.com/wos/author/rid/KOC-6783-2024)
+- Scopus: [59954219900](https://www.scopus.com/authid/detail.uri?authorId=59954219900)
+- Bluesky: [\@thomasphilipheyes.bsky.social](https://bsky.app/profile/thomasphilipheyes.bsky.social)
+- GitHub: [ClangerThom](https://github.com/ClangerThom)
+- LinkedIn: [thomas-philip-heyes](https://www.linkedin.com/in/thomas-philip-heyes-194079390/)
+:::
+
+::::
+
+<!-- Per presentation — uncomment and fill in:
+**Paper:** [Paper title](https://doi.org/...)
+-->
